@@ -65,7 +65,7 @@ const Chatbot = () => {
       ))}
       {isNextChatLoading && <PacmanLoader color="red"/>}
       {isAudioPlaying ? (
-        <p className="text-red-500">&quot;No typing while I speak!&quot;</p>
+        <p className="text-red-500">&quot;No typing while I <span className="text-[150px]">sing</span>!&quot;</p>
         
       ) : (
         <ChatInput addChat={addChat} />
