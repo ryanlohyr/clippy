@@ -9,8 +9,8 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 
 const Chatbot = () => {
   const [chats, setChats] = useState([
-    { isMe: false, content: "why are you so lazy!" },
-    { isMe: true, content: "sorry man!" },
+    { isMe: false, content: "HEY! STOP BEING PRODUCTIVE" },
+    { isMe: true, content: "Micheal... can you just let me get back to work...." },
   ]);
 
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
