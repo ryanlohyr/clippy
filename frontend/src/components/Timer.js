@@ -37,7 +37,7 @@ const Timer = () => {
         </h1>
       ) : (
         <h1 className="text-xl font-bold">
-          You need to stay on this site for {timeLeft} seconds xd xd xd
+          You work too much!!! You need to stay on this site for {timeLeft} seconds xd xd xd
         </h1>
       )}
     </div>
