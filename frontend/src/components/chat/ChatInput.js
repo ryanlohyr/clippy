@@ -3,16 +3,21 @@
 import React, { useState } from "react";
 import SearchIcon from "@/components/icons/SearchIcon";
 import { Mic } from "lucide-react";
+import { generateText } from "@/app/ai";
+
 const ChatInput = ({ isNextChatLoading, addChat }) => {
   const [input, setInput] = useState("");
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
 
-  const submitInput = () => {
+  const submitInput = async () => {
     if (input.trim()) {
-      addChat({message : input, isMe: true});
+      console.log("submitInput +++=============");
+      await addChat({message : input, isMe: true});
       setInput("");
+      // const response = await generateText(input);
+      // addChat({message : response, isMe: false});
     }
   };
 
