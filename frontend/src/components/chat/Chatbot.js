@@ -25,7 +25,7 @@ const Chatbot = () => {
       audio.pause(); // Pause the audio
       audio.currentTime = 0; // Reset the audio to the beginning
       console.log("Audio stopped after 15 seconds");
-    }, 5000);
+    }, 12000);
 
     // Optional: Add event listeners to track the end of the audio
     audio.onended = () => {
@@ -54,7 +54,7 @@ const Chatbot = () => {
     setIsNextChatLoading(false);
     setTimeout(() => {
       setIsAudioPlaying(false);
-    }, 5000);
+    }, 12000);
     
   };
 
