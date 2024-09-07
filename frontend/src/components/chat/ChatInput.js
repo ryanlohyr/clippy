@@ -30,7 +30,7 @@ const ChatInput = ({ isNextChatLoading, addChat }) => {
             name="message"
             value={input}
             onChange={handleInputChange}
-            placeholder="Ask me anything..."
+            placeholder="i want you to be useless..."
             className="text-black resize-none px-4 max-h-[120px] grow border-none rounded-xl focus:outline-none border-transparent focus:ring-0 overflow-x-hidden"
           />
 

@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { ChatBubble } from "./ChatBubble";
 import ChatInput from "./ChatInput";
 import { generateText } from "@/app/ai";
+import PacmanLoader from "react-spinners/PacmanLoader";
+
 
 const Chatbot = () => {
   const [chats, setChats] = useState([
@@ -12,6 +14,7 @@ const Chatbot = () => {
   ]);
 
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isNextChatLoading, setIsNextChatLoading] = useState(false);
 
   const playMp3 = (audioLink) => {
     console.log("Playing audio:", audioLink);
@@ -33,6 +36,7 @@ const Chatbot = () => {
 
   const addChat = async ({ message, isMe }) => {
     setChats((chats) => [...chats, { isMe, content: message }]);
+    setIsNextChatLoading(true);
     const response = await generateText(message);
     const audioLink = response.audioLink;
     setChats((prevChats) => [
@@ -41,6 +45,8 @@ const Chatbot = () => {
     ]);
     setIsAudioPlaying(true);
     playMp3(audioLink);
+    setIsNextChatLoading(false);
+    
   };
 
   return (
@@ -48,6 +54,7 @@ const Chatbot = () => {
       {chats.map((chat, index) => (
         <ChatBubble key={index} isMe={chat.isMe} content={chat.content} />
       ))}
+      {isNextChatLoading && <PacmanLoader color="red"/>}
       {isAudioPlaying ? (
         "No typing while i speak!"
       ) : (

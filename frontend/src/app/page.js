@@ -1,5 +1,5 @@
+import Timer from "@/components/Timer";
 import Chatbot from "@/components/chat/chatbot";
-
 export default function Home() {
   return (
     <div className="relative w-full min-h-screen">
@@ -13,7 +13,7 @@ export default function Home() {
         <source src="https://dn720407.ca.archive.org/0/items/rick-roll/Rick%20Roll.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-
+    <Timer />
       {/* Content on top of the video */}
       <div className="flex flex-col items-center justify-center min-h-screen">
         <img
