@@ -3,16 +3,6 @@
 import React, { useState, useEffect } from "react";
 
 const Timer = () => {
-  const [timeLeft, setTimeLeft] = useState(20); // Initialize the timer at 30 seconds
-
-  useEffect(() => {
-    // Create a countdown effect
-    if (timeLeft > 0) {
-      const timerId = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-      return () => clearTimeout(timerId); // Cleanup the timer
-    }
-  }, [timeLeft]);
-
   // Get the params from the URL
   const params = new URLSearchParams(window.location.search);
   const is_reset = params.get("is_reset");
@@ -28,6 +18,16 @@ const Timer = () => {
       </div>
     );
   }
+
+  const [timeLeft, setTimeLeft] = useState(20); // Initialize the timer at 30 seconds
+
+  useEffect(() => {
+    // Create a countdown effect
+    if (timeLeft > 0) {
+      const timerId = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearTimeout(timerId); // Cleanup the timer
+    }
+  }, [timeLeft]);
 
   return (
     <div className="absolute top-0 w-full bg-black text-white p-4 flex justify-center">
