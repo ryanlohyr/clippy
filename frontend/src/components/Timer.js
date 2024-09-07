@@ -3,20 +3,28 @@
 import React, { useState, useEffect } from "react";
 
 const Timer = () => {
+  const [timeLeft, setTimeLeft] = useState(20); // Initialize the timer at 30 seconds
 
-    const [timeLeft, setTimeLeft] = useState(20); // Initialize the timer at 30 seconds
+  useEffect(() => {
+    // Create a countdown effect
+    if (timeLeft > 0) {
+      const timerId = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearTimeout(timerId); // Cleanup the timer
+    }
+  }, [timeLeft]);
 
-    useEffect(() => {
-      // Create a countdown effect
-      if (timeLeft > 0) {
-        const timerId = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-        return () => clearTimeout(timerId); // Cleanup the timer
-      }
-    }, [timeLeft]);
-    
   // Get the params from the URL
-  const params = new URLSearchParams(window.location.search);
-  const is_reset = params.get("is_reset");
+  if (typeof window !== "undefined") {
+    params = new URLSearchParams(window.location.search);
+  }
+
+  let is_reset = null;
+
+
+  if (typeof params !== "undefined") {
+    is_reset = params.get("is_reset");
+  }
+
 
   if (is_reset === "true") {
     return (
@@ -38,7 +46,8 @@ const Timer = () => {
         </h1>
       ) : (
         <h1 className="text-xl font-bold">
-          You work too much!!! You need to stay on this site for {timeLeft} seconds xd xd xd
+          You work too much!!! You need to stay on this site for {timeLeft}{" "}
+          seconds xd xd xd
         </h1>
       )}
     </div>
