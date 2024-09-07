@@ -1,5 +1,5 @@
 export async function generateText(userInput) {
-    const response = await fetch('http://localhost:52472', {
+    const response = await fetch('https://clippy-ai.clippy.workers.dev', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
