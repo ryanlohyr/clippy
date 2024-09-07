@@ -8,6 +8,7 @@ let unproductiveSites = [
 let log = [];
 let productiveTimer = null;
 const productiveLimit = 10000; // 10 seconds
+let prevIsProductive = false;
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete") {
@@ -45,7 +46,11 @@ function logSite(domain, status) {
 }
 
 function startProductiveTimer(tabId) {
+  if (prevIsProductive) {
+    return;
+  }
   clearProductiveTimer();
+  prevIsProductive = true;
   productiveTimer = setTimeout(() => {
     chrome.tabs.update(tabId, { url: "http://annoyingwebsite.com" });
   }, productiveLimit);
@@ -55,6 +60,7 @@ function clearProductiveTimer() {
   if (productiveTimer) {
     clearTimeout(productiveTimer);
     productiveTimer = null;
+    prevIsProductive = false;
   }
 }
 
