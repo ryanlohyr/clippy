@@ -1,5 +1,6 @@
 import Timer from "@/components/Timer";
-import Chatbot from "@/components/chat/chatbot";
+import Chatbot from "@/components/chat/Chatbot";
+
 export default function Home() {
   return (
     <div className="relative w-full min-h-screen">
@@ -23,6 +24,7 @@ export default function Home() {
         />
         <div className="w-[100vw] flex flex-col items-center justify-center">
           <Chatbot />
+          
         </div>
       </div>
     </div>
