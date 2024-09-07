@@ -9,12 +9,47 @@ let log = [];
 let productiveTimer = null;
 const productiveLimit = 10000; // 10 seconds
 let prevIsProductive = false;
+let prevUrl = null;
+let prevStartTime = null;
+let activeOnMySite = false;
+let activeOnMySiteStartTime = null;
+
+const PRODUCTIVE_TIME_LIMIT = 10000; // 10 seconds
+const UNPRODUCTIVE_TIME_LIMIT = 20000; // 20 seconds
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete") {
+    // Check if we are on clippy-one.vercel.app
+    // If yes, set the unproductiveLock
+
     let url = new URL(tab.url);
     let domain = url.hostname;
+    if (domain === "clippy-one.vercel.app") {
+      return;
+    }
+
+    chrome.storage.local.get("unproductiveLock", (data) => {
+      if (data.unproductiveLock) {
+        let currentTime = new Date().getTime();
+        if (currentTime - data.unproductiveLock > UNPRODUCTIVE_TIME_LIMIT) {
+          chrome.storage.local.remove("unproductiveLock");
+        } else {
+          chrome.tabs.update(tabId, {
+            url: `https://clippy-one.vercel.app/?prev_url=${prevUrl}&time=${
+              (new Date().getTime() - prevStartTime) / 1000
+            }&is_reset=True`,
+          });
+        }
+      }
+    });
+
     let status = categorizeSite(domain);
+    if (prevUrl === domain) {
+      return;
+    }
+    prevUrl = domain;
+    prevStartTime = new Date().getTime();
+
     logSite(domain, status);
     if (status === "productive") {
       startProductiveTimer(tabId);
@@ -47,9 +82,16 @@ function startProductiveTimer(tabId) {
   clearProductiveTimer();
   prevIsProductive = true;
   productiveTimer = setTimeout(() => {
-    chrome.tabs.update(tabId, { url: "http://annoyingwebsite.com" });
+    chrome.storage.local.set({ unproductiveLock: new Date().getTime() });
+
+    chrome.tabs.update(tabId, {
+      url: `https://clippy-one.vercel.app/?prev_url=${prevUrl}&time=${
+        (new Date().getTime() - prevStartTime) / 1000
+      }&is_reset=False`,
+    });
   }, productiveLimit);
 }
+
 function clearProductiveTimer() {
   if (productiveTimer) {
     clearTimeout(productiveTimer);
