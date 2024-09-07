@@ -23,7 +23,7 @@ const Timer = () => {
   let is_reset = null;
 
 
-  if (typeof params !== "undefined" || params !== null) {
+  if (typeof params !== "undefined" && params !== null) {
     is_reset = params.get("is_reset");
   }
 
