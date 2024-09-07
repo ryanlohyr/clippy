@@ -3,8 +3,14 @@ chrome.runtime.sendMessage({ action: "getLog" }, (response) => {
   let logDiv = document.getElementById("log");
   logDiv.innerHTML = "<h2>Last 5 Sites:</h2>";
   log.forEach((entry) => {
-    logDiv.innerHTML += `<p>${entry.domain} - ${entry.status} - ${new Date(
+    logDiv.innerHTML += `<p><b>Website: </b>${
+      entry.domain
+    }</p> <h4>Type:</h4><p>${
+      entry.status
+    }</p> <h4>Time Started</h4><p>${new Date(
       entry.timestamp
-    ).toLocaleTimeString()}</p>`;
+    ).toLocaleTimeString()}</p>
+    <p>-----------------</p>
+    `;
   });
 });
