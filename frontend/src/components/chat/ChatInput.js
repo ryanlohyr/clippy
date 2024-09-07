@@ -11,13 +11,10 @@ const ChatInput = ({ isNextChatLoading, addChat }) => {
     setInput(e.target.value);
   };
 
-  const submitInput = async () => {
+  const submitInput = () => {
     if (input.trim()) {
-      console.log("submitInput +++=============");
-      await addChat({message : input, isMe: true});
+      addChat({message : input, isMe: true});
       setInput("");
-      // const response = await generateText(input);
-      // addChat({message : response, isMe: false});
     }
   };
 

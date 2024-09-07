@@ -1,7 +1,4 @@
 export async function generateText(userInput) {
-    console.log('generateText +++=============');
-    console.log('userInput', userInput);
-
     const response = await fetch('http://localhost:52472', {
         method: 'POST',
         headers: {

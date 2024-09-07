@@ -12,13 +12,8 @@ const Chatbot = () => {
   ]);
 
   const addChat = async ({ message, isMe }) => {
-    console.log("addChat +++=============");
-    // console.log("previous chats: " + prevChats);
-    // console.log("message:" + message);
     setChats((chats) => [...chats, { isMe, content: message }]);
-    const response = await generateText(chats);
-    // console.log("previous chats:" + prevChats);
-    // console.log("response:" + response);
+    const response = await generateText(message);
     setChats((prevChats) => [...prevChats, { isMe: false, content: response }]);
   };
 
