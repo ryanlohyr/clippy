@@ -21,16 +21,22 @@ const Chatbot = () => {
     const audio = new Audio(audioLink); // Create a new Audio object with the audio link
     audio.play(); // Play the audio
 
+    setTimeout(() => {
+      audio.pause(); // Pause the audio
+      audio.currentTime = 0; // Reset the audio to the beginning
+      console.log("Audio stopped after 15 seconds");
+    }, 5000);
+
     // Optional: Add event listeners to track the end of the audio
     audio.onended = () => {
       console.log("Audio finished playing");
-      setIsAudioPlaying(false); // Update the state to indicate the audio has finished
+      // setIsAudioPlaying(false); // Update the state to indicate the audio has finished
     };
 
     // Optional: Handle error in case the audio fails to play
     audio.onerror = (e) => {
       console.error("Error playing audio:", e);
-      setIsAudioPlaying(false); // Update the state in case of an error
+      // setIsAudioPlaying(false); // Update the state in case of an error
     };
   };
 
@@ -46,6 +52,9 @@ const Chatbot = () => {
     setIsAudioPlaying(true);
     playMp3(audioLink);
     setIsNextChatLoading(false);
+    setTimeout(() => {
+      setIsAudioPlaying(false);
+    }, 5000);
     
   };
 
@@ -56,7 +65,8 @@ const Chatbot = () => {
       ))}
       {isNextChatLoading && <PacmanLoader color="red"/>}
       {isAudioPlaying ? (
-        "No typing while i speak!"
+        <p className="text-red">"No typing while i speak!"</p>
+        
       ) : (
         <ChatInput addChat={addChat} />
       )}

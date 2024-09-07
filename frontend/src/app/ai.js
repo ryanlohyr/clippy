@@ -18,6 +18,6 @@ export async function generateText(userInput) {
   return {
     text: data.response,
     audioLink:
-      "https://jouvirevendors.s3.ap-southeast-1.amazonaws.com/efek-suara-funny-putri-lucu-180275.mp3",
+      "https://ia800605.us.archive.org/8/items/NeverGonnaGiveYouUp/jocofullinterview41.mp3",
   };
 }
