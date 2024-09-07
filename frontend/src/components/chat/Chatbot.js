@@ -14,7 +14,7 @@ const Chatbot = () => {
   const addChat = async ({ message, isMe }) => {
     setChats((chats) => [...chats, { isMe, content: message }]);
     const response = await generateText(message);
-    setChats((prevChats) => [...prevChats, { isMe: false, content: response }]);
+    setChats((prevChats) => [...prevChats, { isMe: false, content: response.text }]);
   };
 
   return (
