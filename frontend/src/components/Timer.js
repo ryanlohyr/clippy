@@ -13,6 +13,8 @@ const Timer = () => {
     }
   }, [timeLeft]);
 
+  let params = null;
+
   // Get the params from the URL
   if (typeof window !== "undefined") {
     params = new URLSearchParams(window.location.search);
